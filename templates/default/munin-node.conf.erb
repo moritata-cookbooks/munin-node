@@ -1,0 +1,34 @@
+log_level 4
+log_file /var/log/munin-node/munin-node.log
+pid_file /var/run/munin/munin-node.pid
+
+background 1
+setsid 1
+
+user root
+group root
+
+# Regexps for files to ignore
+ignore_file [\#~]$
+ignore_file DEADJOE$
+ignore_file \.bak$
+ignore_file %$
+ignore_file \.dpkg-(tmp|new|old|dist)$
+ignore_file \.rpm(save|new)$
+ignore_file \.pod$
+
+#host_name localhost.localdomain
+host_name <%= node['munin-node']['hostname'] %>;
+
+allow ^127\.0\.0\.1$
+allow ^::1$
+#allow ^10\.181\.194\.63$
+#allow ^219\.94\.253\.112$
+allow <%= node['munin-node']['munin-server'] %>;
+
+# Which address to bind to;
+host *
+# host 127.0.0.1
+
+#port 4949
+port <%= node['munin-node']['port'] %>;
